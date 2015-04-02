@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <title>My Steroids App</title>
+
+    <link rel="stylesheet" href="/components/supersonic/css/supersonic.css">
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <link rel="import" href="/components/supersonic/components/import.html">
+</head>
+
+<body ng-app="SteroidsApplication">
+
+    <div class="padding" ng-controller="RadialController as vm">
+        <super-navbar>
+            <super-navbar-title ng-bind="vm.navbarTitle">
+            </super-navbar-title>
+        </super-navbar>
+    </div>
+
+    <script src="http://localhost/cordova.js"></script>
+    <script src="/components/steroids-js/steroids.js"></script>
+    <script src="/components/angular/angular.js"></script>
+    <script src="/components/supersonic/supersonic.js"></script>
+    <script src="/components/webcomponentsjs/webcomponents.js"></script>
+    <script src="/scripts/application.js"></script>
+    <script src="/scripts/modules/radial-slider/controllers/radial.client.controller.js"></script>
+
+</body>
+</html>
