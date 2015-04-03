@@ -1,0 +1,29 @@
+.hs-slider {
+  position: absolute;
+
+  &.small {
+    top: 100px;
+    left: 100px;
+  }
+
+  &.medium {
+    top: 50px;
+    left: 50px;
+  }
+
+  &.large {
+    top: 0;
+    left: 0;
+  }
+
+  &.core {
+    top: 150px;
+    left: 150px;
+    width: 240px;
+    height: 240px;
+    border-radius: 100%;
+    background: #00857f;
+    text-align: center;
+    color: #fff;
+  }
+}

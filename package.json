@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {},
   "devDependencies": {
-    "grunt-steroids": "1.x"
+    "grunt-steroids": "1.x",
+    "grunt-contrib-watch": "^0.6.1"
   }
 }

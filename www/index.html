@@ -9,24 +9,56 @@
     <link rel="stylesheet" href="/components/supersonic/css/supersonic.css">
     <link rel="stylesheet" href="/stylesheets/application.css">
     <link rel="import" href="/components/supersonic/components/import.html">
+    <link rel="stylesheet" href="../www/stylesheets/application.css">
 </head>
 
 <body ng-app="SteroidsApplication">
 
-    <div class="padding" ng-controller="RadialController as vm">
-        <super-navbar>
-            <super-navbar-title ng-bind="vm.navbarTitle">
-            </super-navbar-title>
-        </super-navbar>
-    </div>
+    <!--<div data-ng-controller="SlidersController as vm" class="hs-wrapper">-->
+        <!--<div ng-repeat="slider in vm.sliders" class="hs-slider" ng-class="slider.type">-->
+            <!--<knob knob-release="vm.incrementTotal(slider)" knob-data="slider.day" knob-options="slider.options"></knob>-->
+        <!--</div>-->
+        <!--<div class="hs-slider core hs-vertical-middle">-->
+            <!--<span class="hs-core-value" data-ng-bind="vm.total"></span>-->
+        <!--</div>-->
+    <!--</div>-->
 
+
+
+
+    <!-- Libraries JS -->
+    <!--<script src="http://localhost/cordova.js"></script>-->
+    <!--<script src="/components/steroids-js/steroids.js"></script>-->
+    <!--<script src="/components/angular/angular.js"></script>-->
+    <!--<script src="/components/supersonic/supersonic.js"></script>-->
+    <!--<script src="/components/webcomponentsjs/webcomponents.js"></script>-->
+    <!--<script src="/components/jquery/dist/jquery.min.js"></script>-->
+    <!--<script src="/components/jquery-knob/dist/jquery.knob.min.js"></script>-->
+
+    <!-- Application JS -->
+    <!--<script src="/scripts/application.js"></script>-->
+    <!--<script src="/scripts/modules/radial-slider/directives/knob.client.directive.js"></script>-->
+    <!--<script src="/scripts/modules/radial-slider/services/sliders.client.service.js"></script>-->
+    <!--<script src="/scripts/modules/radial-slider/controllers/sliders.client.controller.js"></script>-->
+
+
+
+    <!--Development-->
+
+    <!-- Libraries JS -->
     <script src="http://localhost/cordova.js"></script>
-    <script src="/components/steroids-js/steroids.js"></script>
-    <script src="/components/angular/angular.js"></script>
-    <script src="/components/supersonic/supersonic.js"></script>
-    <script src="/components/webcomponentsjs/webcomponents.js"></script>
-    <script src="/scripts/application.js"></script>
-    <script src="/scripts/modules/radial-slider/controllers/radial.client.controller.js"></script>
+    <script src="../bower_components/steroids-js/steroids.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/supersonic/supersonic.js"></script>
+    <script src="../bower_components/webcomponentsjs/webcomponents.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
+
+    <!-- Application JS -->
+    <script src="../www/scripts/application.js"></script>
+    <script src="../www/scripts/modules/radial-slider/directives/knob.client.directive.js"></script>
+    <script src="../www/scripts/modules/radial-slider/services/sliders.client.service.js"></script>
+    <script src="../www/scripts/modules/radial-slider/controllers/sliders.client.controller.js"></script>
 
 </body>
 </html>

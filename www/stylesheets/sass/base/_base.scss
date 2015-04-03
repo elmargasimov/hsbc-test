@@ -1,0 +1,16 @@
+body {
+  font-family: "Helvetic Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.hs-wrapper {
+  margin-top: 3%;
+  position: relative;
+}
+
+.hs-vertical-middle {
+  display: table;
+  & > * {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
