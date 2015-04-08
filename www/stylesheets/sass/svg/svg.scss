@@ -1,11 +1,14 @@
-.hs-svg-core {
-  height: 500px;
-  width: 500px;
+.hs-axis text {
+  font: 10px sans-serif;
+  fill: #b2b2b2;
 }
 
-.circle {
-  stroke: green;
-  fill: #003565;
-  stroke-width: 10;
-  stroke-linecap: butt;
+.hs-axis line {
+  stroke: #b2b2b2;
+  stroke-dasharray: 2;
+  stroke-width: 1;
+}
+
+.hs-core {
+  fill: #00857f;
 }
