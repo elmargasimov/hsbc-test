@@ -20,7 +20,8 @@
             createCircle: createCircle,
             createText: createText,
             createArc: createArc,
-            createMultipleRings: createMultipleRings
+            createMultipleRings: createMultipleRings,
+            drawPath: drawPath
         };
 
         return service;
@@ -98,36 +99,28 @@
                 });
         }
 
-        function createArc(offset, sliderThickness, marginSliders, maxValue) {
-            var arc = d3.svg.arc()
-                .innerRadius(function(d,i,j) {
-                    return offset + (j*sliderThickness) + (j*marginSliders);
-                })
-                .outerRadius(function(d,i,j){
-                    return offset + (j+1) * sliderThickness + (j*marginSliders);
-                })
-                .startAngle(0)
-                .endAngle(function(d,i,j) {
-                    var toRadian = service.toRadian(maxValue);
-                    return toRadian(d[j].initialValue);
-                });
-            return arc;
+        function createArc(innerRadius, outerRadius, startAngle, endAngle) {
+            return d3.svg.arc()
+                .innerRadius(innerRadius || 0)
+                .outerRadius(outerRadius)
+                .startAngle(startAngle || 0)
+                .endAngle(endAngle);
         }
 
-        function createMultipleRings (el, arc, data) {
-            var slider = el.selectAll('.hs-base')
+        function createMultipleRings (el, data) {
+            return el.selectAll('.hs-base')
                 .data(data)
                 .enter()
                 .append('g')
                 .attr('class', 'hs-slider');
+        }
 
-            slider.selectAll('path')
-                .data([data])
+        function drawPath (el, d, data) {
+            return el.selectAll('path')
+                .data(data)
                 .enter()
                 .append('path')
-                .attr('d', arc);
-
-            return slider;
+                .attr('d', d);
         }
     }
 
