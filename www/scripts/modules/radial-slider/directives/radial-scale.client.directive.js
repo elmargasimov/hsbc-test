@@ -3,14 +3,16 @@
 
     angular.module('SteroidsApplication').directive('radialScale', radialScale);
 
-    radialScale.$inject = ['scaleUtils'];
+    radialScale.$inject = ['d3Utils'];
 
-    function radialScale (scaleUtils) {
+    function radialScale (d3Utils) {
 
         var directive = {
             scope: {
                 scaleData: "=hsData"
             },
+            controller: 'RadialScaleController',
+            controllerAs: 'hs',
             restrict: 'EA',
             link: link
         };
@@ -30,31 +32,28 @@
                 marginCoreRadius = 35,
                 marginSliders = 19,
                 sliderThickness = 30,
-                totalValue = 0,
+                totalValue = scope.hs.totalValue,
                 sliderJSON,
-                toDays = scaleUtils.toDays(maxDays),
-                toDegrees = scaleUtils.toDegrees(maxDays),
-                toRadian = scaleUtils.toRadian(maxDays);
+                toDays = d3Utils.toDays(maxDays),
+                toDegrees = d3Utils.toDegrees(maxDays),
+                toRadian = d3Utils.toRadian(maxDays),
+                radian = Math.PI / 180;
 
             var svg,
                 arc,
+                core,
                 slider,
                 sliderPath,
                 drag;
-
-            var tau = Math.PI * 2,
-                handleRadius = 16.5,
-                radiansPerStep = tau/maxDays,
-                animateDuration = 100;
-
 
             activate();
 
             ////////////////
 
             function activate () {
-                sliderJSON = scope.scaleData;
-                svg = scaleUtils.createSVG(element[0], width, height);
+                sliderJSON = scope.hs.scaleConfig;
+                svg = d3Utils.createSVG(element[0], width, height);
+                svg.attr('class', 'hs-base');
                 createBackground(svg);
                 createCore(svg);
                 createSliders(svg);
@@ -62,24 +61,33 @@
 
             function createBackground(svg) {
                 var data = d3.range(0, 360, toDegrees(1));
-                var axis = scaleUtils.createAxis(svg, data);
-                scaleUtils.createDashedLines(axis, radius);
-                scaleUtils.createDigits(axis, radius, maxDays);
+                var axis = d3Utils.createAxis(svg, data);
+                axis.attr('class', 'hs-axis');
+                d3Utils.createDashedLines(axis, radius);
+                d3Utils.createDigits(axis, radius, maxDays);
             }
 
             function createCore(svg) {
-                var core = svg.append('g');
+                core = svg.append('g');
                 core.attr('class', 'hs-core');
-                scaleUtils.createCircle(core, coreRadius);
-                var text = scaleUtils.createText(core, totalValue);
-                text.attr('text-anchor', 'middle');
+                d3Utils.createCircle(core, coreRadius);
+
+                var title = d3Utils.createText(core, 'Total');
+                title.attr('class', 'hs-core-title');
+                title.attr('y', '-15');
+
+                var value = d3Utils.createText(core, totalValue);
+                value.attr('class', 'hs-core-value');
+                value.attr('y', '20');
             }
 
             function createSliders(svg) {
                 var nestedData;
                 var offsetFromCentre = coreRadius + marginCoreRadius;
+                var startAngle = 0;
 
-                // This abstract the inner and outer radius away from the scale data
+                // Create dynamic inner and outer radii independent of scale data json
+                // So it works with 1 as well as n
                 function innerRadius (d,i,j) {
                     // This refers to the sliderPath
                     var innerRadius = offsetFromCentre + (j*sliderThickness) + (j*marginSliders);
@@ -95,12 +103,12 @@
                 }
 
                 function endAngle (d) {
-                    return toRadian(d.initialValue);
+                    return toRadian(d.startDay);
                 }
 
-                arc = scaleUtils.createArc(innerRadius, outerRadius, 0, endAngle);
+                arc = d3Utils.createArc(innerRadius, outerRadius, startAngle, endAngle);
 
-                slider = scaleUtils.createMultipleRings(svg, sliderJSON);
+                slider = d3Utils.createMultipleRings(svg, sliderJSON);
 
                 nestedData = function(d) {
                     // Because d3 needs an array, and d is an object
@@ -108,35 +116,42 @@
                     return [d];
                 };
 
-                sliderPath = scaleUtils.drawPath(slider, arc, nestedData);
+                // Draws the arc path
+                sliderPath = d3Utils.drawPath(slider, arc, nestedData);
 
-                sliderPath.attr('fill', function(d) {
-                    return d.colour;
-                });
-
-                // Set slider data
-                sliderPath.each(function(d) {
-                    this.currentValue = d.initialValue;
-                    this.currentRadian = toRadian(d.initialValue);
-                });
+                sliderPath
+                    .attr('fill', function(d) {
+                        return d.colour;
+                    })
+                    .each(function(d) {
+                        // 'this' refers to sliderPath
+                        // Set initial data
+                        d.day = d.startDay;
+                        d.value = d.day * d.multiplier;
+                        d.currentRadian = toRadian(d.startDay);
+                    });
 
                 drag = d3.behavior.drag()
-                    .on('drag', setAngleStep);
+                    .on('drag', setAngle);
 
                 sliderPath.call(drag);
             }
 
-            function setAngleStep(d) {
+            function setAngle(d) {
                 var angle = findAngle(d3.event.x, d3.event.y);
-                var radian = angle * Math.PI / 180;
-                //this.currentValue = parseInt(toDays(angle));
-
-                var newArc = scaleUtils.createArc(this.innerRadius, this.outerRadius, 0, radian);
+                // Create a new arc with the angle converted to a radian
+                var newArc = d3Utils.createArc(this.innerRadius, this.outerRadius, 0, angle*radian);
                 d3.select(this).attr('d', newArc);
+                updateValues(angle, d);
+            }
 
-                g.datum(data).selectAll("path")
-                    .data(pie).exit().remove();
-
+            function updateValues(newAngle, d) {
+                d.day = parseInt(toDays(newAngle));
+                d.value = d.day * d.multiplier;
+                d.deltaValue = d.value - d.startValue;
+                d.deltaDay = d.day - d.startDay;
+                d.currentRadian = newAngle*radian;
+                scope.$apply();
             }
 
             function findAngle(x, y) {

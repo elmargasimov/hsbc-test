@@ -1,16 +1,18 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
-  font-family: "Helvetic Neue", "Helvetica", "Arial", sans-serif;
+  font-family: $font-family;
 }
 
-.hs-wrapper {
-  margin-top: 3%;
-  position: relative;
-}
-
-.hs-vertical-middle {
-  display: table;
-  & > * {
-    display: table-cell;
-    vertical-align: middle;
-  }
+.hs-container-right {
+  position: absolute;
+  right: 40px;
+  top:50%;
+  transform: translateY(-50%);
 }

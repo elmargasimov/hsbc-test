@@ -11,6 +11,8 @@
     function RadialScaleController(scaleConfig) {
         var hs = this;
         hs.scaleConfig = null;
+        hs.totalValue = 0;
+        hs.calculateTotal = calculateTotal;
 
         initialise();
 
@@ -18,7 +20,11 @@
 
         function initialise() {
             hs.scaleConfig = scaleConfig;
+            calculateTotal();
+        }
+
+        function calculateTotal(one, two, three) {
+            hs.totalValue = two + three - one;
         }
     }
-
 })();

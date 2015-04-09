@@ -1,12 +1,11 @@
-'use strict';
-
 (function () {
+    'use strict';
 
     angular
         .module('SteroidsApplication')
-        .factory('scaleUtils', scaleUtils);
+        .factory('d3Utils', d3Utils);
 
-    function scaleUtils() {
+    function d3Utils() {
         var tau = Math.PI * 2;
 
         var service = {
@@ -51,14 +50,12 @@
                 .attr('width', width)
                 .attr('height', height)
                 .append('g')
-                .attr('class', 'hs-base')
                 .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
             return svg;
         }
 
         function createAxis (el,data) {
             var axis = el.append('g')
-                .attr('class', 'hs-axis')
                 .attr('transform', function() {
                     return 'rotate(-90)';
                 })
@@ -123,5 +120,4 @@
                 .attr('d', d);
         }
     }
-
 })();

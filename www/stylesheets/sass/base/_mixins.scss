@@ -1,0 +1,15 @@
+@mixin colourSB($colour) {
+  .hs-sb-header {
+    background: $colour;
+  }
+
+  .hs-sb-box-value,
+  .hs-sb-box-delta-icon,
+  .hs-sb-box-delta-value {
+    color: $colour;
+  }
+
+  .hs-sb-box-title {
+    color: lighten($colour, 20%);
+  }
+}

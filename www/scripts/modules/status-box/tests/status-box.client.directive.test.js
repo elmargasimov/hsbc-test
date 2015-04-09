@@ -1,9 +1,9 @@
 'use strict';
 
 (function(){
-    describe('Directive: radialScale', function () {
+    describe('Directive: statusBox', function () {
         var element, scope, compile, defaultData;
-        var validTemplate = '<radial-scale class="hs-svg-core" hs-data="data"></radial-scale>';
+        var validTemplate = '<status-box hs-data="data"></status-box>';
 
         function createDirective(data, template) {
             var elm;
@@ -28,16 +28,22 @@
             // Reset data each time
             defaultData = [
                 {
-                    "initialValue": 36,
-                    "colour": "#820008"
-                },
-                {
-                    "initialValue": 50,
-                    "colour": "#2f7490"
-                },
-                {
+                    "name": "Calc 1",
                     "initialValue": 31,
-                    "colour": "#3e505a"
+                    "colour": "#3e505a",
+                    "multiplier": 5
+                },
+                {
+                    "name": "Calc 2",
+                    "initialValue": 50,
+                    "colour": "#2f7490",
+                    "multiplier": 4
+                },
+                {
+                    "name": "Calc 3",
+                    "initialValue": 36,
+                    "colour": "#820008",
+                    "multiplier": 3
                 }
             ];
 
