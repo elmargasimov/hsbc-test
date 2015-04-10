@@ -18,7 +18,8 @@ module.exports = function(config) {
         'bower_components/supersonic/supersonic.js',
         'www/scripts/*.js',
         'www/scripts/modules/**/*.js',
-        'www/scripts/modules/**/tests/*.js'
+        'www/scripts/modules/**/tests/*.js',
+        'www/scripts/modules/**/views/*.html'
     ],
 
 
@@ -30,8 +31,9 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        'www/scripts/modules/**/views/*.html':['ng-html2js'],
+        stripPrefix: '../'
     },
-
 
     // test results reporter to use
     // possible values: 'dots', 'progress'

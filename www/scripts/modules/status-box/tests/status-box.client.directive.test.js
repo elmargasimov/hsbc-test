@@ -2,14 +2,11 @@
 
 (function(){
     describe('Directive: statusBox', function () {
-        var element, scope, compile, defaultData;
-        var validTemplate = '<status-box hs-data="data"></status-box>';
+        var element, scope, compile, template;
+        var validTemplate = '<status-box></status-box>';
 
-        function createDirective(data, template) {
+        function createDirective(template) {
             var elm;
-
-            // Setup scope state
-            scope.data = data || defaultData;
 
             // Create directive
             elm = compile(template || validTemplate)(scope);
@@ -24,39 +21,15 @@
         beforeEach(function () {
             // Load the directive's module
             module('SteroidsApplication', 'supersonic');
-
-            // Reset data each time
-            defaultData = [
-                {
-                    "name": "Calc 1",
-                    "initialValue": 31,
-                    "colour": "#3e505a",
-                    "multiplier": 5
-                },
-                {
-                    "name": "Calc 2",
-                    "initialValue": 50,
-                    "colour": "#2f7490",
-                    "multiplier": 4
-                },
-                {
-                    "name": "Calc 3",
-                    "initialValue": 36,
-                    "colour": "#820008",
-                    "multiplier": 3
-                }
-            ];
-
-            // Provide any mocks needed
-            module(function ($provide) {
-                //$provide.value('Name', new MockName());
-            });
+            module('scripts/modules/status-box/views/status-box.client.view.html');
 
             // Inject in angular constructs otherwise,
             //  you would need to inject these into each test
-            inject(function ($rootScope, $compile) {
-                scope = $rootScope.$new();
-                compile = $compile;
+            inject(function (_$rootScope_, _$compile_, $templateCache) {
+                template = $templateCache.get('../www/scripts/modules/status-box/views/status-box.client.view.html');
+                $templateCache.put('www/scripts/templates/status-box.client.view.html',template);
+                scope = _$rootScope_.$new();
+                compile = _$compile_;
             });
         });
 
@@ -68,3 +41,4 @@
         });
     });
 }());
+
