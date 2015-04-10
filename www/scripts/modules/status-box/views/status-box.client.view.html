@@ -1,0 +1,19 @@
+<div class="hs-sb {{statusBox.class}}" data-ng-repeat="statusBox in hs.statusBoxes | orderBy:'name'">
+    <header class="hs-sb-header">
+        <h3 class="hs-sb-header-title" data-ng-bind="statusBox.name"></h3>
+    </header>
+    <section class="hs-sb-body">
+        <div class="hs-sb-box">
+            <span class="hs-sb-box-title">Days</span>
+            <span class="hs-sb-box-value" data-ng-bind="statusBox.day"></span>
+            <span class="hs-sb-box-delta-icon icon ion-arrow-down-b" ng-class="{'ion-arrow-up-b': statusBox.deltaDay >= 0}"></span>
+            <span class="hs-sb-box-delta-value" data-ng-bind="statusBox.deltaDay">x</span>
+        </div>
+        <div class="hs-sb-box">
+            <span class="hs-sb-box-title">Value</span>
+            <span class="hs-sb-box-value" data-ng-bind="statusBox.value"></span>
+            <span class="hs-sb-box-delta-icon icon ion-arrow-down-b" ng-class="{'ion-arrow-up-b': statusBox.deltaValue >= 0}"></span>
+            <span class="hs-sb-box-delta-value" data-ng-bind="statusBox.deltaValue"></span>
+        </div>
+    </section>
+</div>

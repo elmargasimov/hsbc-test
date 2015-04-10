@@ -1,0 +1,66 @@
+.hs-sb {
+  width: 212px;
+  margin-bottom: 20px;
+}
+
+.hs-sb-header {
+  width: inherit;
+  height: 20px;
+  padding: 5px;
+}
+
+.hs-sb-header-title {
+  font-weight: 100;
+  font-size: 11px;
+  line-height: 14px;
+  text-transform: uppercase;
+  margin: 0;
+  color: $color-white;
+}
+
+.hs-sb-body {
+  height: 58px;
+}
+
+.hs-sb-box {
+  width: 50%;
+  padding: 10px 12px;
+  display: inline-block;
+  float: left;
+  border-right: 1px solid rgba(0,0,0,0.15);
+  &:last-child {
+    border: none;
+  }
+}
+
+.hs-sb-box-title {
+  font-size: 10px;
+  font-weight: 100;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.hs-sb-box-value {
+  font-size: 18px;
+}
+
+.hs-calc-1 {
+  @include colourSB($color-blue-grey);
+  .hs-sb-box {
+    background: #ebedee;
+  }
+}
+
+.hs-calc-2 {
+ @include colourSB($color-blue);
+  .hs-sb-box {
+    background: #eaf1f4;
+  }
+}
+
+.hs-calc-3 {
+  @include colourSB($color-red);
+  .hs-sb-box {
+    background: #f2e5e6;
+  }
+}

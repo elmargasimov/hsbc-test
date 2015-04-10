@@ -1,5 +1,6 @@
-@import "base/base";
 @import "base/variables";
-@import "base/typography";
-@import "components/slider";
+@import "base/mixins";
+@import "base/base";
+@import "base/helpers";
+@import "modules/status-box";
 @import "svg/svg";

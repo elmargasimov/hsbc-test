@@ -1,15 +1,9 @@
-/*
-
- Default Gruntfile for AppGyver Steroids
- http://www.appgyver.com
- Licensed under the MIT license.
-
- */
-
 module.exports = function (grunt) {
 
     // Unified Watch Object
     var watchFiles = {
+        clientJs: ['www/scripts/**/{,*/}*.js'],
+        clientTests: ['www/scripts/modules/**/tests/*.js'],
         clientSass: ['www/stylesheets/sass/{,*/}*.{scss,sass}']
     };
 
@@ -42,6 +36,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask("default", [
         "steroids-make-fresh",
-        "sass"
+        "sass:dist"
     ]);
-}
+};

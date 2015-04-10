@@ -1,11 +1,28 @@
-.hs-svg-core {
-  height: 500px;
-  width: 500px;
+.hs-axis text {
+  font: 10px sans-serif;
+  fill: #b2b2b2;
 }
 
-.circle {
-  stroke: green;
-  fill: #003565;
-  stroke-width: 10;
-  stroke-linecap: butt;
+.hs-axis line {
+  stroke: #b2b2b2;
+  stroke-dasharray: 2;
+  stroke-width: 1;
+}
+
+.hs-core circle {
+  fill: #00857f;
+}
+
+.hs-core text {
+  fill: #fff;
+  font-weight: 100;
+  text-anchor: middle;
+}
+
+.hs-core .hs-core-title {
+  font-size: 10px;
+}
+
+.hs-core .hs-core-value {
+  font-size: 28px;
 }

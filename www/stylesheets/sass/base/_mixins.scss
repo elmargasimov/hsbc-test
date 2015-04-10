@@ -1,0 +1,35 @@
+@mixin colourSB($colour) {
+  .hs-sb-header {
+    background: $colour;
+  }
+
+  .hs-sb-box-value,
+  .hs-sb-box-delta-icon,
+  .hs-sb-box-delta-value {
+    color: $colour;
+  }
+
+  .hs-sb-box-title {
+    color: lighten($colour, 20%);
+  }
+}
+
+@mixin bp($point) {
+  @if $point == tablet {
+    @media only screen
+    and (min-device-width : 768px)
+    and (max-device-width : 1024px) { @content ; }
+  }
+  @else if $point == tablet-portrait {
+    @media only screen
+    and (min-device-width : 768px)
+    and (max-device-width : 1024px)
+    and (orientation : portrait) { @content ; }
+  }
+  @else if $point == tablet-landscape {
+    @media only screen
+    and (min-device-width : 768px)
+    and (max-device-width : 1024px)
+    and (orientation : landscape) { @content ; }
+  }
+}
