@@ -46,16 +46,15 @@
         }
 
         function createSVG(el, width, height) {
-            var svg = d3.select(el).append('svg')
+            return d3.select(el).append('svg')
                 .attr('width', width)
                 .attr('height', height)
                 .append('g')
                 .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-            return svg;
         }
 
         function createAxis (el,data) {
-            var axis = el.append('g')
+            return el.append('g')
                 .attr('transform', function() {
                     return 'rotate(-90)';
                 })
@@ -66,7 +65,6 @@
                 .attr('transform', function(d) {
                     return 'rotate(' + d + ')';
                 });
-            return axis;
         }
 
         function createDashedLines (el, radius) {

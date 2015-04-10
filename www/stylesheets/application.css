@@ -11,11 +11,23 @@ body {
   position: absolute;
   right: 40px;
   top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
   transform: translateY(-50%); }
+  @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+    .hs-container-right {
+      position: absolute;
+      -webkit-transform: none;
+      -moz-transform: none;
+      -o-transform: none;
+      transform: none;
+      top: initial;
+      bottom: 40px; } }
 
 .hs-sb {
   width: 212px;
-  margin-bottom: 8px; }
+  margin-bottom: 20px; }
 
 .hs-sb-header {
   width: inherit;

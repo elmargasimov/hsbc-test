@@ -8,6 +8,7 @@
     function scaleConfig() {
         var JSON = [
             {
+                "id": "three",
                 "name": "Calc 3",
                 "topTenPercent": 11,
                 "startDay": 36,
@@ -19,6 +20,7 @@
                 "class": "hs-calc-3"
             },
             {
+                "id": "two",
                 "name": "Calc 2",
                 "topTenPercent": 16,
                 "startDay": 50,
@@ -30,6 +32,7 @@
                 "class": "hs-calc-2"
             },
             {
+                "id": "one",
                 "name": "Calc 1",
                 "topTenPercent": 27,
                 "startDay": 31,
