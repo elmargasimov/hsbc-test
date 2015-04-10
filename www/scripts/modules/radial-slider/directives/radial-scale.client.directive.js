@@ -31,14 +31,13 @@
                 sliderThickness = 30,
 
                 maxDays = 72,
-                totalValue = 0,
                 sliderJSON,
                 toDays = d3Utils.toDays(maxDays),
                 toDegrees = d3Utils.toDegrees(maxDays),
                 toRadian = d3Utils.toRadian(maxDays),
                 radian = Math.PI / 180,
 
-                svg, arc, core, coreValue, slider, sliderPath, dragHandle;
+                svg, arc, core, coreValue, deltaValue, slider, sliderPath, dragHandle;
 
             activate();
 
@@ -46,6 +45,7 @@
 
             function activate () {
                 sliderJSON = scope.hs.scaleConfig;
+                scope.totalStartValue = 287;
                 svg = d3Utils.createSVG(element[0], width, height);
                 svg.attr('class', 'hs-base');
                 createBackground(svg);
@@ -63,6 +63,7 @@
             }
 
             function createCore(svg) {
+                var totalValue = scope.totalStartValue;
                 core = svg.append('g');
                 core.attr('class', 'hs-core');
                 d3Utils.createCircle(core, coreRadius);
@@ -74,6 +75,10 @@
                 coreValue = d3Utils.createText(core, totalValue);
                 coreValue.attr('class', 'hs-core-value');
                 coreValue.attr('y', '20');
+
+                deltaValue = d3Utils.createText(core, 0);
+                deltaValue.attr('class', 'hs-total-delta-value');
+                deltaValue.attr('y', '45');
             }
 
             function createSliders(svg) {
@@ -181,9 +186,17 @@
             }
 
             function calculateTotal() {
-                totalValue = scope.hs.two.value + scope.hs.three.value - scope.hs.one.value;
+                scope.totalValue = scope.hs.two.value + scope.hs.three.value - scope.hs.one.value;
                 coreValue.text(function(){
-                    return totalValue;
+                    return scope.totalValue;
+                });
+                calculateDelta();
+            }
+
+            function calculateDelta() {
+                scope.deltaTotalValue = scope.totalValue - scope.totalStartValue;
+                deltaValue.text(function(){
+                    return scope.deltaTotalValue;
                 });
             }
         }
